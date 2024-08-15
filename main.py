@@ -150,7 +150,7 @@ def lol():
             
             if 'Successfully 1000 views sent.' in str(base64_string2):
                 c+=1
-                print(f'Successfully 1000 views sent. - {c}', end = "\r")
+                print(f'Successfully 1000 views sent. - {c}')
             else:
                 print(base64_string2) 
 
@@ -167,7 +167,5 @@ if __name__ == '__main__':
     # tttt = 90
 
     while True:
-        for i in range(3):
-            lol()
-            time.sleep(5)
+        lol()
         time.sleep(120)
