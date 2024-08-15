@@ -7,7 +7,7 @@ c = 0
 s = requests.session()
 url = "https://zefoy.com"
 COOKIES = {"Cookie": None}
-# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
 
@@ -67,15 +67,16 @@ s.headers.update(
 
 r2 = s.get('{}{}'.format(url, captcha_image))
 
-with open('a.png', 'wb') as f:
+with open('CAPTCHA.png', 'wb') as f:
     f.write(r2.content)
 
-BYPASS_CAPTCHA = pytesseract.image_to_string("a.png")
+BYPASS_CAPTCHA = pytesseract.image_to_string("CAPTCHA.png")
 BYPASS_CAPTCHA = BYPASS_CAPTCHA.replace('\n', '')
-# print(BYPASS_CAPTCHA)
+
 data = {
     form: BYPASS_CAPTCHA,
 }
+
 r3 = s.post('https://zefoy.com/', data = data).text
 
 
@@ -84,9 +85,7 @@ def lol():
 
     if 'placeholder="Enter Video URL"' in str(r3):
         video_form = re.search('name="(.*?)" placeholder="Enter Video URL"', str(r3)).group(1)
-        # print(video_form)
         post_action = re.findall('action="(.*?)">', str(r3))[3]
-        # print(post_action)
 
         COOKIES.update(
             {
@@ -111,18 +110,16 @@ def lol():
             }
         )
         
-        # print(f'------------------------------{COOKIES["Cookie"]}')
         data = MultipartEncoder(
             {
                 video_form: (None, video_url)
             }, boundary=boundary
         )
         
-        # print(data)
+
         response = s.post('https://zefoy.com/{}'.format(post_action), data = data).text
         base64_string = DECRYPTION_BASE64(response)
 
-        # print(base64_string)
 
         if 'type="submit"' in str(base64_string):
 
@@ -148,27 +145,23 @@ def lol():
             response2 = s.post('https://zefoy.com/{}'.format(next_post_action), data = data).text
             base64_string2 = DECRYPTION_BASE64(response2)
 
-
             if 'Successfully 1000 views sent.' in str(base64_string2):
                 c+=1
-                print(f'Successfully 1000 views sent. - {c}')
+                print(f'Successfully 1000 views sent. - {c}', end = "\r")
             else:
                 pass
-                # print('Error 1000 views.')
+
         else:
-            # print('Error submit')
             pass
 
     else:
-        # print(s.cookies.get_dict())
-        # print("No url")
         pass
 
 
 
 if __name__ == '__main__':
-    video_url = input("Link: ")
-    tttt = int(input("Time in second: "))
+    video_url = "https://www.tiktok.com/@eimw/video/7402091422154788097"
+    tttt = 120
 
     while True:
         lol()
