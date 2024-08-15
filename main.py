@@ -7,7 +7,7 @@ c = 0
 s = requests.session()
 url = "https://zefoy.com"
 COOKIES = {"Cookie": None}
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
 
