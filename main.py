@@ -152,7 +152,7 @@ def lol():
                 c+=1
                 print(f'Successfully 1000 views sent. - {c}', end = "\r")
             else:
-                pass
+                print(base64_string2) 
 
         else:
             pass
@@ -164,9 +164,10 @@ def lol():
 
 if __name__ == '__main__':
     video_url = "https://www.tiktok.com/@eimw/video/7402091422154788097"
-    tttt = 90
+    # tttt = 90
 
     while True:
         lol()
+        time.sleep(5)
         lol()
-        time.sleep(tttt)
+        time.sleep(60)
