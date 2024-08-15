@@ -1,9 +1,10 @@
-import pytesseract
+import pytesseract, os
 import base64, urllib.parse, time
 import requests, re, random, string, json
 from requests_toolbelt import MultipartEncoder
 
 c = 0
+os.system("clear")
 s = requests.session()
 url = "https://zefoy.com"
 COOKIES = {"Cookie": None}
@@ -72,7 +73,7 @@ with open('CAPTCHA.png', 'wb') as f:
 
 BYPASS_CAPTCHA = pytesseract.image_to_string("CAPTCHA.png")
 BYPASS_CAPTCHA = BYPASS_CAPTCHA.replace('\n', '')
-print(f"CAPTCHA: {BYPASS_CAPTCHA}")
+# print(f"CAPTCHA: {BYPASS_CAPTCHA}")
 data = {
     form: BYPASS_CAPTCHA,
 }
@@ -145,7 +146,7 @@ def lol():
             response2 = s.post('https://zefoy.com/{}'.format(next_post_action), data = data).text
             base64_string2 = DECRYPTION_BASE64(response2)
 
-            print(base64_string2)
+            # print(base64_string2)
             
             if 'Successfully 1000 views sent.' in str(base64_string2):
                 c+=1
