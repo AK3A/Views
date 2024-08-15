@@ -163,8 +163,8 @@ def lol():
 
 if __name__ == '__main__':
     video_url = "https://www.tiktok.com/@eimw/video/7402091422154788097"
-    # tttt = 120
+    tttt = 120
 
     while True:
         lol()
-        time.sleep(120)
+        time.sleep(tttt)
