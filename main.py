@@ -73,7 +73,7 @@ with open('CAPTCHA.png', 'wb') as f:
 
 BYPASS_CAPTCHA = pytesseract.image_to_string("CAPTCHA.png")
 BYPASS_CAPTCHA = BYPASS_CAPTCHA.replace('\n', '')
-# print(f"CAPTCHA: {BYPASS_CAPTCHA}")
+print(f"CAPTCHA: {BYPASS_CAPTCHA}")
 data = {
     form: BYPASS_CAPTCHA,
 }
