@@ -73,7 +73,7 @@ with open('CAPTCHA.png', 'wb') as f:
 
 BYPASS_CAPTCHA = pytesseract.image_to_string("CAPTCHA.png")
 BYPASS_CAPTCHA = BYPASS_CAPTCHA.replace('\n', '')
-print(f"CAPTCHA: {BYPASS_CAPTCHA}")
+# print(f"CAPTCHA: {BYPASS_CAPTCHA}")
 data = {
     form: BYPASS_CAPTCHA,
 }
@@ -151,8 +151,8 @@ def lol():
             if 'Successfully 1000 views sent.' in str(base64_string2):
                 c+=1
                 print(f'Successfully 1000 views sent. - {c}')
-            else:
-                print(base64_string2) 
+            # else:
+                # print(base64_string2) 
 
         else:
             pass
