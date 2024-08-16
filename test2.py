@@ -1,10 +1,11 @@
-import pytesseract, math
+import pytesseract, math, os
 from datetime import datetime
 import base64, urllib.parse, time
 import requests, re, random, string, json
 from requests_toolbelt import MultipartEncoder
 
 c = 0
+os.system("clear")
 s = requests.session()
 url = "https://zefoy.com"
 COOKIES = {"Cookie": None}
@@ -180,8 +181,7 @@ if __name__ == '__main__':
     while True:
         try:
             lol()
-            time.sleep(3)
             tttt = ltm(base64_string2)
             time.sleep(tttt[0])
         except:
-            time.sleep(120)
+            time.sleep(5)
