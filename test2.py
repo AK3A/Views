@@ -16,6 +16,15 @@ def DECRYPTION_BASE64(base64_code):
     return base64.b64decode(urllib.parse.unquote(base64_code[::-1])).decode()
 
 
+def countdown(sec, c):
+    
+    while sec:
+        m, ss = divmod(sec, 60)
+        print(f'Successfully Favorites sent. - {c} - wait {m} minute(s) {ss} seconds for your next Request', end = "\r")
+        time.sleep(1)
+        sec -= 1
+
+
 def ltm(t):
     stm = math.floor(datetime.now().timestamp() / 1000)
     ltm = int(re.search('ltm=(.*?);', str(t)).group(1))
@@ -53,44 +62,47 @@ def BYPASS_IKLAN_GOOGLE():
             return (f"_gads={json_cookies['_cookies_'][0]['_value_']}; __gpi={json_cookies['_cookies_'][1]['_value_']}")
         else:
             return ('_gads=; __gpi=;')
-    
-s.headers = {
-    'Accept-Language': 'en-US,en;q=0.9',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-    'Sec-Fetch-Mode': 'navigate',
-    'Sec-Fetch-Site': 'none',
-    'Host': 'zefoy.com',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36',
-    'Sec-Fetch-User': '?1',
-    'Sec-Fetch-Dest': 'document'
-}
 
-r = s.get(url).text
 
-captcha_image = re.search('src="(.*?)" onerror="imgOnError\\(\\)"', r).group(1).replace('amp;', '')
-form = re.search('type="text" name="(.*?)"', str(r)).group(1)
+def BYPASS():
+    global r3
 
-s.headers.update(
-    {
-        'Cookie': "; ".join([str(x) + "=" + str(y) for x, y in s.cookies.get_dict().items()]),
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    s.headers = {
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'none',
+        'Host': 'zefoy.com',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36',
+        'Sec-Fetch-User': '?1',
+        'Sec-Fetch-Dest': 'document'
     }
-)
 
-r2 = s.get('{}{}'.format(url, captcha_image))
+    r = s.get(url).text
 
-with open('CAPTCHA.png', 'wb') as f:
-    f.write(r2.content)
+    captcha_image = re.search('src="(.*?)" onerror="imgOnError\\(\\)"', r).group(1).replace('amp;', '')
+    form = re.search('type="text" name="(.*?)"', str(r)).group(1)
 
-BYPASS_CAPTCHA = pytesseract.image_to_string("CAPTCHA.png")
-BYPASS_CAPTCHA = BYPASS_CAPTCHA.replace('\n', '')
-print(BYPASS_CAPTCHA)
-time.sleep(3)
-data = {
-    form: BYPASS_CAPTCHA,
-}
+    s.headers.update(
+        {
+            'Cookie': "; ".join([str(x) + "=" + str(y) for x, y in s.cookies.get_dict().items()]),
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+        }
+    )
 
-r3 = s.post('https://zefoy.com/', data = data).text
+    r2 = s.get('{}{}'.format(url, captcha_image))
+
+    with open('CAPTCHA.png', 'wb') as f:
+        f.write(r2.content)
+
+    BYPASS_CAPTCHA = pytesseract.image_to_string("CAPTCHA.png")
+    BYPASS_CAPTCHA = BYPASS_CAPTCHA.replace('\n', '')
+
+    data = {
+        form: BYPASS_CAPTCHA,
+    }
+    r3 = s.post('https://zefoy.com/', data = data).text
+BYPASS()
 
 
 def lol():
@@ -164,7 +176,13 @@ def lol():
 
             if 'Favorites successfully sent.' in str(base64_string2):
                 c+=1
-                print(f'Successfully Favorites sent. - {c} - wait {m} minute(s) {ss} seconds for your next Request', end = "\r")
+                try:
+                    countdown(ss, c)
+                except:
+                    print(f'Successfully Favorites sent. - {c}', end = "\r")
+                    time.sleep(ss)
+            elif 'Session expired.' in str(base64_string2):
+                print('\n\n\nSession expired. Please re-login.\n\n\n') 
             else:
                 pass
 
@@ -172,7 +190,9 @@ def lol():
             pass
 
     else:
-        pass
+        print("Error BYPASS CAPTCHA")
+        BYPASS()
+        time.sleep(3)
 
 
 if __name__ == '__main__':
@@ -181,7 +201,6 @@ if __name__ == '__main__':
     while True:
         try:
             lol()
-            tttt = ltm(base64_string2)
-            time.sleep(tttt[0])
+            time.sleep(1)
         except:
-            time.sleep(5)
+            time.sleep(10)
