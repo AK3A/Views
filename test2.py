@@ -171,16 +171,18 @@ def lol():
             # print(f"\n\n\n{base64_string2}\n\n\n")
 
             ll = ltm(base64_string2)[0]
+            lll = int(re.search('ltm=(.*?);', str(t)).group(1))
+            print(f"\n\n\n {ll} - {lll} \n\n\n")
             # m = ll[1]
             # ss = ll[2]
 
             if 'Favorites successfully sent.' in str(base64_string2):
                 c+=1
                 try:
-                    countdown(ll, c)
+                    countdown(lll, c)
                 except:
                     print(f'Successfully Favorites sent. - {c}', end = "\r")
-                    time.sleep(ll)
+                    time.sleep(lll)
             elif 'Session expired.' in str(base64_string2):
                 print('\n\n\nSession expired. Please re-login.\n\n\n') 
             else:
