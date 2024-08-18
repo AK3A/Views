@@ -171,7 +171,7 @@ def lol():
             # print(f"\n\n\n{base64_string2}\n\n\n")
 
             ll = ltm(base64_string2)[0]
-            lll = int(re.search('ltm=(.*?);', str(t)).group(1))
+            lll = int(re.search('ltm=(.*?);', str(base64_string2)).group(1))
             print(f"\n\n\n {ll} - {lll} \n\n\n")
             # m = ll[1]
             # ss = ll[2]
