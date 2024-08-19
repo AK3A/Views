@@ -168,15 +168,16 @@ def lol():
             response2 = s.post('https://zefoy.com/{}'.format(next_post_action), data = data).text
             base64_string2 = DECRYPTION_BASE64(response2)
 
-            # print(f"\n\n\n{base64_string2}\n\n\n")
+            print(f"\n\n\n{base64_string2}\n\n\n")
 
-            ll = ltm(base64_string2)[0]
-            lll = int(re.search('ltm=(.*?);', str(base64_string2)).group(1))
-            print(f"\n\n\n {ll} - {lll} \n\n\n")
+
             # m = ll[1]
             # ss = ll[2]
 
             if 'Favorites successfully sent.' in str(base64_string2):
+                ll = ltm(base64_string2)[0]
+                lll = int(re.search('ltm=(.*?);', str(base64_string2)).group(1))
+                print(f"\n\n\n {ll} - {lll} \n\n\n")
                 c+=1
                 try:
                     countdown(lll, c)
